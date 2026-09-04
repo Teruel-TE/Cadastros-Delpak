@@ -1,0 +1,291 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+body {
+    background: #f3f4f6;
+    min-height: 100vh;
+    padding: 35px;
+}
+
+
+/* =========================
+   TÍTULO PRINCIPAL
+========================= */
+
+h1 {
+    text-align: center;
+
+    font-size: 36px;
+
+    color: #222;
+
+    margin-bottom: 50px;
+    background-color: #e72858;
+    height: 80px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   ÁREA PRINCIPAL
+========================= */
+
+.principal {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 80px;
+}
+
+
+/* =========================
+   TEXTO ESQUERDA
+========================= */
+
+.texto {
+    flex: 1;
+
+    max-width: 600px;
+}
+
+
+.texto h2 {
+    font-size: 28px;
+
+    color: #222;
+
+    margin-bottom: 20px;
+}
+
+
+.texto p {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #555;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.formulario {
+    width: 360px;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+
+.formulario h2 {
+    text-align: center;
+
+    color: #222;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   LABEL
+========================= */
+
+label {
+    display: block;
+
+    margin-top: 12px;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+.obrigatorio {
+    color: red;
+}
+
+
+.opcional {
+    color: #777;
+
+    font-weight: normal;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+input {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+}
+
+
+input:focus {
+    outline: none;
+
+    border-color: #333;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+.campo-celular {
+    display: flex;
+
+    gap: 5px;
+}
+
+
+.campo-celular input {
+    width: 65%;
+}
+
+
+.botao-validar {
+    width: 35%;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #333;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+
+.botao-validar:hover {
+    background: #555;
+}
+
+
+/* =========================
+   BOTÃO CADASTRAR
+========================= */
+
+.botao-cadastrar {
+    width: 100%;
+
+    padding: 11px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #168a35;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.botao-cadastrar:hover {
+    background: #116b29;
+}
+
+
+/* =========================
+   MENSAGEM
+========================= */
+
+.mensagem {
+    text-align: center;
+
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   CELULAR / TABLET
+========================= */
+
+@media (max-width: 800px) {
+
+    body {
+        padding: 25px;
+    }
+
+
+    h1 {
+        font-size: 28px;
+
+        margin-bottom: 35px;
+    }
+
+
+    .principal {
+        flex-direction: column;
+
+        gap: 35px;
+    }
+
+
+    .texto {
+        max-width: 100%;
+    }
+
+
+    .formulario {
+        width: 100%;
+
+        max-width: 360px;
+    }
+}

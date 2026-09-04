@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro</title>
+
+    <!-- Ligação com o CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
+</head>
+
+<body>
+
+    <!-- TÍTULO PRINCIPAL -->
+    <h1>Cadastre-se de forma rápida e segura</h1>
+
+
+    <main class="principal">
+
+        <!-- TEXTO DA ESQUERDA -->
+        <section class="texto">
+
+            <h2>Faça seu cadastro</h2>
+
+            <p>
+                Preencha o formulário ao lado com suas informações
+                para realizar seu cadastro.
+            </p>
+
+            <p>
+                Os dados solicitados são necessários para registrar
+                corretamente suas informações e manter um cadastro
+                organizado.
+            </p>
+
+            <p>
+                Os campos marcados com <strong>*</strong> são
+                obrigatórios. O telefone fixo é opcional.
+            </p>
+
+        </section>
+
+
+        <!-- FORMULÁRIO DA DIREITA -->
+        <section class="formulario">
+
+            <h2>Cadastro</h2>
+
+            <form id="formCadastro">
+
+                <!-- NOME -->
+                <label for="nome">
+                    Nome <span class="obrigatorio">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    placeholder="Digite seu nome"
+                    required
+                >
+
+
+                <!-- CNPJ -->
+                <label for="cnpj">
+                    CNPJ <span class="obrigatorio">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="cnpj"
+                    name="cnpj"
+                    placeholder="00.000.000/0000-00"
+                    maxlength="18"
+                    required
+                >
+
+
+                <!-- E-MAIL -->
+                <label for="email">
+                    E-mail <span class="obrigatorio">*</span>
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="exemplo@email.com"
+                    required
+                >
+
+
+                <!-- CELULAR -->
+                <label for="celular">
+                    Celular com DDD
+                    <span class="obrigatorio">*</span>
+                </label>
+
+                <div class="campo-celular">
+
+                    <input
+                        type="tel"
+                        id="celular"
+                        name="celular"
+                        placeholder="(11) 99999-9999"
+                        maxlength="15"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="botao-validar"
+                        onclick="validarCelular()"
+                    >
+                        Validar
+                    </button>
+
+                </div>
+
+
+                <!-- TELEFONE FIXO -->
+                <label for="telefone">
+                    Telefone fixo
+                    <span class="opcional">(opcional)</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    placeholder="(11) 3333-3333"
+                    maxlength="14"
+                >
+
+
+                <!-- BOTÃO CADASTRAR -->
+                <button
+                    type="submit"
+                    class="botao-cadastrar"
+                >
+                    CADASTRAR
+                </button>
+
+
+                <div
+                    id="mensagem"
+                    class="mensagem"
+                ></div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        /*
+            COLOQUE A URL DO GOOGLE APPS SCRIPT AQUI
+        */
+
+        const URL_SCRIPT =
+            "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
+
+
+        /* =========================
+           MÁSCARA CNPJ
+        ========================= */
+
+        document
+            .getElementById("cnpj")
+            .addEventListener("input", function(e) {
+
+                let valor =
+                    e.target.value.replace(/\D/g, "");
+
+                valor = valor.substring(0, 14);
+
+                valor = valor.replace(
+                    /^(\d{2})(\d)/,
+                    "$1.$2"
+                );
+
+                valor = valor.replace(
+                    /^(\d{2})\.(\d{3})(\d)/,
+                    "$1.$2.$3"
+                );
+
+                valor = valor.replace(
+                    /\.(\d{3})(\d)/,
+                    ".$1/$2"
+                );
+
+                valor = valor.replace(
+                    /(\d{4})(\d)/,
+                    "$1-$2"
+                );
+
+                e.target.value = valor;
+
+            });
+
+
+        /* =========================
+           MÁSCARA CELULAR
+        ========================= */
+
+        document
+            .getElementById("celular")
+            .addEventListener("input", function(e) {
+
+                let valor =
+                    e.target.value.replace(/\D/g, "");
+
+                valor = valor.substring(0, 11);
+
+                valor = valor.replace(
+                    /^(\d{2})(\d)/,
+                    "($1) $2"
+                );
+
+                valor = valor.replace(
+                    /(\d{5})(\d)/,
+                    "$1-$2"
+                );
+
+                e.target.value = valor;
+
+            });
+
+
+        /* =========================
+           MÁSCARA TELEFONE FIXO
+        ========================= */
+
+        document
+            .getElementById("telefone")
+            .addEventListener("input", function(e) {
+
+                let valor =
+                    e.target.value.replace(/\D/g, "");
+
+                valor = valor.substring(0, 10);
+
+                valor = valor.replace(
+                    /^(\d{2})(\d)/,
+                    "($1) $2"
+                );
+
+                valor = valor.replace(
+                    /(\d{4})(\d)/,
+                    "$1-$2"
+                );
+
+                e.target.value = valor;
+
+            });
+
+
+        /* =========================
+           VALIDAR CELULAR
+        ========================= */
+
+        function validarCelular() {
+
+            const celular =
+                document
+                    .getElementById("celular")
+                    .value
+                    .replace(/\D/g, "");
+
+            const mensagem =
+                document.getElementById("mensagem");
+
+
+            if (celular.length !== 11) {
+
+                mensagem.innerText =
+                    "Digite um celular válido com DDD.";
+
+                mensagem.style.color = "red";
+
+                return;
+            }
+
+
+            mensagem.innerText =
+                "Celular válido!";
+
+            mensagem.style.color = "green";
+
+        }
+
+
+        /* =========================
+           ENVIAR CADASTRO
+        ========================= */
+
+        document
+            .getElementById("formCadastro")
+            .addEventListener("submit", async function(e) {
+
+                e.preventDefault();
+
+
+                const mensagem =
+                    document.getElementById("mensagem");
+
+
+                const nome =
+                    document.getElementById("nome").value.trim();
+
+                const cnpj =
+                    document.getElementById("cnpj").value.trim();
+
+                const email =
+                    document.getElementById("email").value.trim();
+
+                const celular =
+                    document.getElementById("celular").value.trim();
+
+                const telefone =
+                    document.getElementById("telefone").value.trim();
+
+
+                /* VALIDAR CNPJ */
+
+                const cnpjNumeros =
+                    cnpj.replace(/\D/g, "");
+
+
+                if (cnpjNumeros.length !== 14) {
+
+                    mensagem.innerText =
+                        "Informe um CNPJ válido.";
+
+                    mensagem.style.color = "red";
+
+                    return;
+                }
+
+
+                /* VALIDAR CELULAR */
+
+                const celularNumeros =
+                    celular.replace(/\D/g, "");
+
+
+                if (celularNumeros.length !== 11) {
+
+                    mensagem.innerText =
+                        "Informe um celular válido com DDD.";
+
+                    mensagem.style.color = "red";
+
+                    return;
+                }
+
+
+                /* DADOS */
+
+                const dados = {
+
+                    nome: nome,
+                    cnpj: cnpj,
+                    email: email,
+                    celular: celular,
+                    telefone: telefone
+
+                };
+
+
+                mensagem.innerText =
+                    "Cadastrando...";
+
+                mensagem.style.color = "black";
+
+
+                try {
+
+                    await fetch(URL_SCRIPT, {
+
+                        method: "POST",
+
+                        mode: "no-cors",
+
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+
+                        body: JSON.stringify(dados)
+
+                    });
+
+
+                    mensagem.innerText =
+                        "Cadastro realizado com sucesso!";
+
+                    mensagem.style.color = "green";
+
+
+                    document
+                        .getElementById("formCadastro")
+                        .reset();
+
+
+                } catch (erro) {
+
+                    console.error(erro);
+
+                    mensagem.innerText =
+                        "Erro ao realizar o cadastro.";
+
+                    mensagem.style.color = "red";
+
+                }
+
+            });
+
+    </script>
+
+</body>
+
+</html>
+```
