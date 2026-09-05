@@ -2,23 +2,30 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Cadastro Exclusivo</title>
 
-    <!-- Ligação com o CSS -->
     <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-    <!-- TÍTULO PRINCIPAL COM ANIMAÇÃO DE ENTRADA -->
-    <h1 class="titulo-principal">Cadastre-se de forma rápida e segura</h1>
+    <!-- TÍTULO PRINCIPAL -->
+    <h1 class="titulo-principal">
+        Cadastre-se de forma rápida e segura
+    </h1>
+
 
     <main class="principal" id="secao-principal">
 
         <!-- TEXTO DA ESQUERDA -->
         <section class="texto">
+
             <h2>Faça seu cadastro</h2>
 
             <p>
@@ -33,21 +40,27 @@
             </p>
 
             <p>
-                Os campos marcados com <strong class="obrigatorio">*</strong> são
-                obrigatórios. O telefone fixo é opcional.
+                Os campos marcados com
+                <strong class="obrigatorio">*</strong>
+                são obrigatórios. O telefone fixo é opcional.
             </p>
+
         </section>
+
 
         <!-- FORMULÁRIO DA DIREITA -->
         <section class="formulario">
+
             <h2>Criar Conta</h2>
 
             <form id="formCadastro">
 
                 <!-- NOME -->
                 <label for="nome">
-                    Nome <span class="obrigatorio">*</span>
+                    Nome
+                    <span class="obrigatorio">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="nome"
@@ -56,10 +69,13 @@
                     required
                 >
 
+
                 <!-- CNPJ -->
                 <label for="cnpj">
-                    CNPJ <span class="obrigatorio">*</span>
+                    CNPJ
+                    <span class="obrigatorio">*</span>
                 </label>
+
                 <input
                     type="text"
                     id="cnpj"
@@ -69,10 +85,13 @@
                     required
                 >
 
+
                 <!-- E-MAIL -->
                 <label for="email">
-                    E-mail <span class="obrigatorio">*</span>
+                    E-mail
+                    <span class="obrigatorio">*</span>
                 </label>
+
                 <input
                     type="email"
                     id="email"
@@ -81,11 +100,15 @@
                     required
                 >
 
+
                 <!-- CELULAR -->
                 <label for="celular">
-                    Celular com DDD <span class="obrigatorio">*</span>
+                    Celular com DDD
+                    <span class="obrigatorio">*</span>
                 </label>
+
                 <div class="campo-celular">
+
                     <input
                         type="tel"
                         id="celular"
@@ -94,19 +117,24 @@
                         maxlength="15"
                         required
                     >
+
                     <button
                         type="button"
                         class="botao-validar"
-                        onclick="validarCelular()"
+                        id="botaoValidar"
                     >
                         Validar
                     </button>
+
                 </div>
+
 
                 <!-- TELEFONE FIXO -->
                 <label for="telefone">
-                    Telefone fixo <span class="opcional">(opcional)</span>
+                    Telefone fixo
+                    <span class="opcional">(opcional)</span>
                 </label>
+
                 <input
                     type="tel"
                     id="telefone"
@@ -114,6 +142,7 @@
                     placeholder="(11) 3333-3333"
                     maxlength="14"
                 >
+
 
                 <!-- BOTÃO CADASTRAR -->
                 <button
@@ -123,150 +152,21 @@
                     CADASTRAR
                 </button>
 
-                <div id="mensagem" class="mensagem"></div>
+
+                <div
+                    id="mensagem"
+                    class="mensagem"
+                ></div>
 
             </form>
+
         </section>
 
     </main>
 
-    <script>
-        /* 
-            COLOQUE A URL DO GOOGLE APPS SCRIPT AQUI
-        */
-        const URL_SCRIPT = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
 
-
-        /* =========================
-           EFEITO DE APARECER E SUMIR AO ROLAR (SCROLL)
-        ========================= */
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Quando descer e a caixa aparecer na tela
-                    entry.target.classList.add('mostrar');
-                } else {
-                    // Quando subir e a caixa sair da tela, ela some novamente
-                    entry.target.classList.remove('mostrar');
-                }
-            });
-        }, {
-            threshold: 0.2 // Começa a animar quando 20% da seção estiver visível
-        });
-
-        // Monitora a seção principal do formulário
-        observer.observe(document.getElementById('secao-principal'));
-
-
-        /* =========================
-           MÁSCARA CNPJ
-        ========================= */
-        document.getElementById("cnpj").addEventListener("input", function(e) {
-            let valor = e.target.value.replace(/\D/g, "");
-            valor = valor.substring(0, 14);
-            valor = valor.replace(/^(\d{2})(\d)/, "$1.$2");
-            valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-            valor = valor.replace(/\.(\d{3})(\d)/, ".$1/$2");
-            valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
-            e.target.value = valor;
-        });
-
-
-        /* =========================
-           MÁSCARA CELULAR
-        ========================= */
-        document.getElementById("celular").addEventListener("input", function(e) {
-            let valor = e.target.value.replace(/\D/g, "");
-            valor = valor.substring(0, 11);
-            valor = valor.replace(/^(\d{2})(\d)/, "($1) $2");
-            valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
-            e.target.value = valor;
-        });
-
-
-        /* =========================
-           MÁSCARA TELEFONE FIXO
-        ========================= */
-        document.getElementById("telefone").addEventListener("input", function(e) {
-            let valor = e.target.value.replace(/\D/g, "");
-            valor = valor.substring(0, 10);
-            valor = valor.replace(/^(\d{2})(\d)/, "($1) $2");
-            valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
-            e.target.value = valor;
-        });
-
-
-        /* =========================
-           VALIDAR CELULAR
-        ========================= */
-        function validarCelular() {
-            const celular = document.getElementById("celular").value.replace(/\D/g, "");
-            const mensagem = document.getElementById("mensagem");
-
-            if (celular.length !== 11) {
-                mensagem.innerText = "Digite um celular válido com DDD.";
-                mensagem.style.color = "#ff4d6d";
-                return;
-            }
-
-            mensagem.innerText = "Celular válido!";
-            mensagem.style.color = "#10b981";
-        }
-
-
-        /* =========================
-           ENVIAR CADASTRO
-        ========================= */
-        document.getElementById("formCadastro").addEventListener("submit", async function(e) {
-            e.preventDefault();
-
-            const mensagem = document.getElementById("mensagem");
-            const nome = document.getElementById("nome").value.trim();
-            const cnpj = document.getElementById("cnpj").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const celular = document.getElementById("celular").value.trim();
-            const telefone = document.getElementById("telefone").value.trim();
-
-            /* VALIDAR CNPJ */
-            const cnpjNumeros = cnpj.replace(/\D/g, "");
-            if (cnpjNumeros.length !== 14) {
-                mensagem.innerText = "Informe um CNPJ válido.";
-                mensagem.style.color = "#ff4d6d";
-                return;
-            }
-
-            /* VALIDAR CELULAR */
-            const celularNumeros = celular.replace(/\D/g, "");
-            if (celularNumeros.length !== 11) {
-                mensagem.innerText = "Informe um celular válido com DDD.";
-                mensagem.style.color = "#ff4d6d";
-                return;
-            }
-
-            const dados = { nome, cnpj, email, celular, telefone };
-
-            mensagem.innerText = "Cadastrando...";
-            mensagem.style.color = "#ffffff";
-
-            try {
-                await fetch(URL_SCRIPT, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(dados)
-                });
-
-                mensagem.innerText = "Cadastro realizado com sucesso!";
-                mensagem.style.color = "#10b981";
-                document.getElementById("formCadastro").reset();
-
-            } catch (erro) {
-                console.error(erro);
-                mensagem.innerText = "Erro ao realizar o cadastro.";
-                mensagem.style.color = "#ff4d6d";
-            }
-        });
-    </script>
+    <!-- JavaScript externo -->
+    <script src="script.js"></script>
 
 </body>
 
