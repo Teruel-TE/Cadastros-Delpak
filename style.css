@@ -1,291 +1,245 @@
-
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
 
 /* =========================
-   PÁGINA
+   PÁGINA & FUNDO
 ========================= */
-
 body {
-    background: #f3f4f6;
+    background: #0f0305;
+    color: #ffffff;
     min-height: 100vh;
-    padding: 35px;
+    overflow-x: hidden;
 }
-
 
 /* =========================
    TÍTULO PRINCIPAL
 ========================= */
-
-h1 {
+.titulo-principal {
     text-align: center;
-
-    font-size: 36px;
-
-    color: #222;
-
-    margin-bottom: 50px;
-    background-color: #e72858;
-    height: 80px;
-
-    align-items: center;
-    justify-content: center;
+    font-size: 32px;
+    color: #ffffff;
+    padding: 30px 20px;
+    background: #2a080d;
+    border-bottom: 2px solid rgba(231, 40, 88, 0.3);
+    height: auto;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeInDown 0.8s ease forwards;
 }
 
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* =========================
-   ÁREA PRINCIPAL
+   ÁREA PRINCIPAL (SCROLL LEVE)
 ========================= */
-
 .principal {
     max-width: 1100px;
-
-    margin: auto;
-
+    margin: 60px auto;
+    padding: 60px;
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
+    background: #170508;
+    border: 1px solid rgba(231, 40, 88, 0.3);
+    border-radius: 16px;
+    gap: 60px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 
-    gap: 80px;
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
+.principal.mostrar {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* =========================
    TEXTO ESQUERDA
 ========================= */
-
 .texto {
     flex: 1;
-
-    max-width: 600px;
+    max-width: 500px;
 }
-
 
 .texto h2 {
     font-size: 28px;
-
-    color: #222;
-
+    color: #ff4d6d;
     margin-bottom: 20px;
 }
 
-
 .texto p {
-    font-size: 18px;
-
-    line-height: 1.7;
-
-    color: #555;
-
-    margin-bottom: 18px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #d1d5db;
+    margin-bottom: 15px;
 }
 
+.texto strong {
+    color: #ff758c;
+}
 
 /* =========================
    FORMULÁRIO
 ========================= */
-
 .formulario {
-    width: 360px;
-
-    background: white;
-
-    padding: 25px;
-
-    border-radius: 10px;
-
-    box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.12);
+    width: 380px;
+    background: #21070b;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(231, 40, 88, 0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
-
 
 .formulario h2 {
     text-align: center;
-
-    color: #222;
-
+    color: #ffffff;
     margin-bottom: 20px;
+    font-size: 22px;
 }
-
 
 /* =========================
-   LABEL
+   LABEL & INPUTS
 ========================= */
-
 label {
     display: block;
-
     margin-top: 12px;
-
     margin-bottom: 5px;
-
-    font-size: 14px;
-
-    font-weight: bold;
+    font-size: 13px;
+    font-weight: 600;
+    color: #f3f4f6;
 }
-
 
 .obrigatorio {
-    color: red;
+    color: #ff4d6d;
 }
 
-
 .opcional {
-    color: #777;
-
+    color: #9ca3af;
     font-weight: normal;
 }
 
-
-/* =========================
-   INPUT
-========================= */
-
 input {
     width: 100%;
-
-    padding: 10px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 5px;
-
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
     font-size: 14px;
+    background: #0f0305;
+    color: #fff;
+    transition: border-color 0.2s;
 }
 
+input::placeholder {
+    color: #6b7280;
+}
 
 input:focus {
     outline: none;
-
-    border-color: #333;
+    border-color: #ff4d6d;
+    background: #170508;
 }
-
 
 /* =========================
    CELULAR
 ========================= */
-
 .campo-celular {
     display: flex;
-
-    gap: 5px;
+    gap: 8px;
 }
-
 
 .campo-celular input {
-    width: 65%;
+    width: 63%;
 }
-
 
 .botao-validar {
-    width: 35%;
-
+    width: 37%;
     border: none;
-
-    border-radius: 5px;
-
-    background: #333;
-
+    border-radius: 8px;
+    background: #374151;
     color: white;
-
     cursor: pointer;
-
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background 0.2s;
 }
-
 
 .botao-validar:hover {
-    background: #555;
+    background: #4b5563;
 }
-
 
 /* =========================
    BOTÃO CADASTRAR
 ========================= */
-
 .botao-cadastrar {
     width: 100%;
-
-    padding: 11px;
-
+    padding: 13px;
     margin-top: 20px;
-
     border: none;
-
-    border-radius: 5px;
-
-    background: #168a35;
-
+    border-radius: 8px;
+    background: #10b981;
     color: white;
-
     font-size: 15px;
-
     font-weight: bold;
-
     cursor: pointer;
+    transition: background 0.2s;
 }
-
 
 .botao-cadastrar:hover {
-    background: #116b29;
+    background: #059669;
 }
-
 
 /* =========================
    MENSAGEM
 ========================= */
-
 .mensagem {
     text-align: center;
-
-    margin-top: 12px;
-
+    margin-top: 15px;
     font-size: 14px;
-
     font-weight: bold;
 }
 
-
 /* =========================
-   CELULAR / TABLET
+   RESPONSIVIDADE
 ========================= */
-
-@media (max-width: 800px) {
-
+@media (max-width: 900px) {
     body {
-        padding: 25px;
+        padding: 15px;
     }
 
-
-    h1 {
-        font-size: 28px;
-
-        margin-bottom: 35px;
+    .titulo-principal {
+        font-size: 24px;
+        border-radius: 0 0 20px 20px;
     }
-
 
     .principal {
         flex-direction: column;
-
-        gap: 35px;
+        padding: 30px 20px;
+        gap: 30px;
+        margin: 30px auto;
     }
-
 
     .texto {
         max-width: 100%;
+        text-align: center;
     }
-
 
     .formulario {
         width: 100%;
-
-        max-width: 360px;
+        max-width: 100%;
     }
 }
