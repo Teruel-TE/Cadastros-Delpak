@@ -11,6 +11,7 @@ Github: https://github.com/ghssilva09-jpg
 estou utilizando tambem para aprendizado e para ajudar pessoas do meu dia a dia
 
 alem disso: para acessar o site, basta clicar no link abaixo:
+
 https://teruel-te.github.io/Cadastros-Delpak/
 
 e para acessar a planilha de dados, basta clicar no link abaixo:
